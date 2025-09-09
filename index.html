@@ -205,13 +205,13 @@ function answerQuestion(score) {
       for(const [domainName, score] of Object.entries(domainScores)) {
         let risk = "";
         if(domainName === "Domain 1 (Blinding)" || domainName === "Domain 5 (Preparation and Integration)") {
-          if(score === 0) risk = "low risk of bias";
-          else if(score <= 2) risk = "some concern for bias";
-          else risk = "high risk of bias";
+          if(score === 0) risk = "Low risk of bias";
+          else if(score <= 2) risk = "Some concern for bias";
+          else risk = "High risk of bias";
         } else {
-          if(score === 0) risk = "low risk of bias";
-          else if(score === 1) risk = "some concern for bias";
-          else risk = "high risk of bias";
+          if(score === 0) risk = "Low risk of bias";
+          else if(score === 1) risk = "Some concern for bias";
+          else risk = "High risk of bias";
         }
         const p = document.createElement("p");
         p.innerHTML = `${domainName}: score: ${score} = ${risk}`;
@@ -224,11 +224,11 @@ function answerQuestion(score) {
 
     let assessmentText = "";
     if(totalScore <= 4){
-      assessmentText = "Your study has <b>low risk of bias</b>.";
+      assessmentText = "Your study has a <b>low risk of bias</b>.";
     } else if(totalScore <= 9){
       assessmentText = "Your study has <b>some concern for bias</b>.";
     } else {
-      assessmentText = "Your study has <b>high risk of bias</b>.";
+      assessmentText = "Your study has a <b>high risk of bias</b>.";
     }
 
     const finalAssessment = document.getElementById("finalAssessment");
