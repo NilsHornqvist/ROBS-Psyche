@@ -5,8 +5,8 @@
   <title>ROBS-Psyche</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
+      font-family: Times New Roman, sans-serif;
+      background: #000000;
       margin: 0;
       padding: 0;
       display: flex;
@@ -17,10 +17,10 @@
     }
     .container {
       background: #fff;
-      padding: 2rem;
+      padding: 3rem;
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      max-width: 600px;
+      max-width: 800px;
       text-align: center;
     }
     button {
@@ -55,7 +55,9 @@
 
 <div class="container" id="welcome">
   <h1>ROBS-Psyche Assessment</h1>
-  <p>This tool is designed as an add-on risk of bias assessment for randomized controlled trials in psychedelic-assisted therapy. Please note: it is intended for research purposes only. Note that this is only intended for Randomized Control Trials using Psychedelic-Assisted Therapy.</p>
+  <p>This tool is designed as an add-on risk of bias assessment for randomized controlled trials in psychedelic-assisted therapy.</p>
+  <p>Please note: it is intended for research purposes only.</p>
+  <p>Also note: this is only intended for Randomized Control Trials using Psychedelic-Assisted Therapy.</p>
   <button onclick="startAssessment()">Start</button>
 </div>
 
@@ -171,7 +173,7 @@ function answerQuestion(score) {
     if(resultsDiv) resultsDiv.classList.remove("hidden");
 
     const scoreText = document.getElementById("scoreText");
-    if(scoreText) scoreText.innerText = "Your total score: <b><u>" + totalScore + "</u></b>";
+    if(scoreText) scoreText.innerText = "Your total score: " + totalScore;
 
     let assessmentText = "";
     if(totalScore <= 4){
