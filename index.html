@@ -55,7 +55,7 @@
 
 <div class="container" id="welcome">
   <h1>ROBS-Psyche Assessment</h1>
-  <p>This tool is designed as an add-on risk of bias assessment for randomized controlled trials in psychedelic-assisted therapy. Please note: it is intended for research purposes only.</p>
+  <p>This tool is designed as an add-on risk of bias assessment for randomized controlled trials in psychedelic-assisted therapy. Please note: it is intended for research purposes only. Note that this is only intended for Randomized Control Trials using Psychedelic-Assisted Therapy.</p>
   <button onclick="startAssessment()">Start</button>
 </div>
 
@@ -67,6 +67,37 @@
   <div class="option" onclick="answerQuestion(0)">Another psychoactive compound (not a psychedelic) used</div>
 </div>
 
+<div class="container hidden" id="question1">
+  <h2>Therapist Fidelity: Was therapist fidelity checked?</h2>
+  <p>Therapist fidelity is a measure of how closely each therapy session adhered to its predetermined protocol.</p>
+  <p>Select the option that best matches the study you are assessing.</p>
+  <div class="option" onclick="answerQuestion(2)">Therapist’s fidelity was not assessed</div>
+  <div class="option" onclick="answerQuestion(1)">Therapist’s fidelity was used but not directly reported</div>
+  <div class="option" onclick="answerQuestion(1)">Therapist’s fidelity was used but assessed by independent assessors</div>
+  <div class="option" onclick="answerQuestion(0)">Therapist's fidelity to the intended protocol was used, directly reported, and examined by independent assessors.</div>
+</div>
+
+<div class="container hidden" id="question1">
+  <h2>Outcome: Was the scale used to assess the primary outcome appropriate?</h2>
+  <p>The scales used should be scientifically rigorous.</p>
+  <p>Select the option that best matches the study you are assessing.</p>
+  <div class="option" onclick="answerQuestion(2)">The scale shows low sensitivity, is not consistent, is not fully validated, or is not comprehensive</div>
+  <div class="option" onclick="answerQuestion(1)">The scale is validated but relies on self-reporting and is moderately sensitive</div>
+  <div class="option" onclick="answerQuestion(2)">No scales were used to measure absolute scores of the disorder</div>
+  <div class="option" onclick="answerQuestion(0)">The scale is comprehensive, validated, shows high sensitivity, and is clinician-administered</div>
+  <div class="option" onclick="answerQuestion(0)">The scale is comprehensive, validated, shows high sensitivity, but is <strong>not</strong> clinician-administered</div>
+</div>
+
+<div class="container hidden" id="question1">
+  <h2>Set and setting: Were the session-specific settings described and standardized?</h2>
+  <p>Session-specific items include music, eyeshades, how the room was organized, etc.</p>
+  <p>Select the option that best matches the study you are assessing.</p>
+  <div class="option" onclick="answerQuestion(2)">Information about the set and settings is unavailable and was not standardized</div>
+  <div class="option" onclick="answerQuestion(1)">Session-specific settings are reported but not standardized</div>
+  <div class="option" onclick="answerQuestion(1)">Session-specific settings are standardized but not reported</div>
+  <div class="option" onclick="answerQuestion(0)">Set and setting specifics were standardized</div>
+</div>
+  
 <div class="container hidden" id="results">
   <h2>Assessment Complete</h2>
   <p id="scoreText"></p>
