@@ -68,7 +68,7 @@
   <div class="option" onclick="answerQuestion(0)">Another psychoactive compound (not a psychedelic) used</div>
 </div>
 
-<div class="container hidden" id="question1">
+<div class="container hidden" id="question2">
   <h1 id="domain">Domain: Blinding</h1>
   <h2>Does the study investigate blinding success?</h2>
   <p>Select the option that best matches the study you are assessing.</p>
@@ -78,7 +78,7 @@
   <div class="option" onclick="answerQuestion(0)">Blinding success was assessed, and it was 50% or more</div>
 </div>
 
-<div class="container hidden" id="question1">
+<div class="container hidden" id="question3">
   <h1 id="domain">Domain: Therapist Fidelity</h1>
   <h2>Was therapist fidelity checked?</h2>
   <p>Therapist fidelity is a measure of how closely each therapy session adhered to its predetermined protocol.</p>
@@ -89,7 +89,7 @@
   <div class="option" onclick="answerQuestion(0)">Therapist's fidelity to the intended protocol was used, directly reported, and examined by independent assessors.</div>
 </div>
 
-<div class="container hidden" id="question1">
+<div class="container hidden" id="question4">
   <h1 id="domain">Domain: Outcome</h1>
   <h2>Was the scale used to assess the primary outcome appropriate?</h2>
   <p>The scales used should be scientifically rigorous.</p>
@@ -101,7 +101,7 @@
   <div class="option" onclick="answerQuestion(0)">The scale is comprehensive, validated, shows high sensitivity, but is <strong>not</strong> clinician-administered</div>
 </div>
 
-<div class="container hidden" id="question1">
+<div class="container hidden" id="question5">
   <h1 id="domain">Domain: Set and Setting</h1>
   <h2>Were the session-specific settings described and standardized?</h2>
   <p>Session-specific items include music, eyeshades, how the room was organized, etc.</p>
@@ -112,7 +112,7 @@
   <div class="option" onclick="answerQuestion(0)">Set and setting specifics were standardized</div>
 </div>
 
-<div class="container hidden" id="question1">
+<div class="container hidden" id="question6">
   <h1 id="domain">Domain: Preparation and integration</h1>
   <h2>Were proper preparation and integration sessions administered throughout the study?</h2>
   <p>Select the option that best matches the study you are assessing.</p>
@@ -121,7 +121,7 @@
   <div class="option" onclick="answerQuestion(0)">≥3 preparatory / ≥3 integrative sessions per experimental session were administered</div>
 </div>
 
-<div class="container hidden" id="question1">
+<div class="container hidden" id="question7">
   <h1 id="domain">Domain: Preparation and integration</h1>
   <h2>Were the preparatory and integrative processes structured, standardized, and equal across groups?</h2>
   <p>Select the option that best matches the study you are assessing.</p>
@@ -144,32 +144,40 @@
 </div>
 
 <script>
-  let totalScore = 0;
+let totalScore = 0;
+let currentQuestion = 1;
+const totalQuestions = 7;
 
-  function startAssessment() {
-    document.getElementById("welcome").classList.add("hidden");
-    document.getElementById("question1").classList.remove("hidden");
-  }
+function startAssessment() {
+  document.getElementById("welcome").classList.add("hidden");
+  document.getElementById("question1").classList.remove("hidden");
+}
 
-  function answerQuestion(score) {
-    totalScore += score;
-    document.getElementById("question1").classList.add("hidden");
+function answerQuestion(score) {
+  totalScore += score;
+  document.getElementById("question" + currentQuestion).classList.add("hidden");
+  currentQuestion++;
+  if(currentQuestion <= totalQuestions) {
+    document.getElementById("question" + currentQuestion).classList.remove("hidden");
+  } else {
     document.getElementById("results").classList.remove("hidden");
     document.getElementById("scoreText").innerText = "Your total score: " + totalScore;
 
-    // Add final assessment
     let assessmentText = "";
-    if(totalScore >= 0 && totalScore <= 4){
+    if(totalScore <= 4){
       assessmentText = "Your risk of bias on a psychedelic-assisted therapy specific assessment was <b>low risk of bias</b>.";
-    } else if(totalScore >= 5 && totalScore <= 9){
+    } else if(totalScore <= 9){
       assessmentText = "Your risk of bias on a psychedelic-assisted therapy specific assessment was <b>some concern for bias</b>.";
-    } else if(totalScore >= 10 && totalScore <= 14){
+    } else {
       assessmentText = "Your risk of bias on a psychedelic-assisted therapy specific assessment was <b>high risk of bias</b>.";
     }
 
     document.getElementById("finalAssessment").innerHTML = assessmentText;
   }
+}
 </script>
+
+
 
 
 </body>
