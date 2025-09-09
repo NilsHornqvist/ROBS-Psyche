@@ -141,6 +141,7 @@
 <div class="container hidden" id="results">
   <h2>Your ROBS-Psyche assessment is completed</h2>
   <p id="finalAssessment"></p>
+  <div id="domainResults"></div>
   <p id="scoreText"></p>
   <p>Interpretation of score:</p>
   <ul style="text-align:left">
@@ -155,6 +156,24 @@ let totalScore = 0;
 let currentQuestion = 1;
 const totalQuestions = 7;
 
+let domainScores = {
+  "Domain 1 (Blinding)": 0,
+  "Domain 2 (Therapist Fidelity)": 0,
+  "Domain 3 (Outcome)": 0,
+  "Domain 4 (Set and Setting)": 0,
+  "Domain 5 (Preparation and Integration)": 0
+};
+
+const questionDomains = {
+  1: "Domain 1 (Blinding)",
+  2: "Domain 1 (Blinding)",
+  3: "Domain 2 (Therapist Fidelity)",
+  4: "Domain 3 (Outcome)",
+  5: "Domain 4 (Set and Setting)",
+  6: "Domain 5 (Preparation and Integration)",
+  7: "Domain 5 (Preparation and Integration)"
+};
+
 function startAssessment() {
   const welcomeDiv = document.getElementById("welcome");
   if(welcomeDiv) welcomeDiv.classList.add("hidden");
@@ -164,6 +183,9 @@ function startAssessment() {
 
 function answerQuestion(score) {
   totalScore += score;
+
+  const domain = questionDomains[currentQuestion];
+  if(domain) domainScores[domain] += score;
 
   const currentQDiv = document.getElementById("question" + currentQuestion);
   if(currentQDiv) currentQDiv.classList.add("hidden");
@@ -177,16 +199,36 @@ function answerQuestion(score) {
     const resultsDiv = document.getElementById("results");
     if(resultsDiv) resultsDiv.classList.remove("hidden");
 
+    const domainResultsDiv = document.getElementById("domainResults");
+    if(domainResultsDiv) {
+      domainResultsDiv.innerHTML = "";
+      for(const [domainName, score] of Object.entries(domainScores)) {
+        let risk = "";
+        if(domainName === "Domain 1 (Blinding)" || domainName === "Domain 5 (Preparation and Integration)") {
+          if(score === 0) risk = "low risk of bias";
+          else if(score <= 2) risk = "some concern for bias";
+          else risk = "high risk of bias";
+        } else {
+          if(score === 0) risk = "low risk of bias";
+          else if(score === 1) risk = "some concern for bias";
+          else risk = "high risk of bias";
+        }
+        const p = document.createElement("p");
+        p.innerHTML = `${domainName}: score: ${score} = ${risk}`;
+        domainResultsDiv.appendChild(p);
+      }
+    }
+
     const scoreText = document.getElementById("scoreText");
-    if(scoreText) scoreText.innerText = "The studys total score is: " + totalScore;
+    if(scoreText) scoreText.innerHTML = "Total score: <b>" + totalScore + "</b>";
 
     let assessmentText = "";
     if(totalScore <= 4){
-      assessmentText = "Your study has a <b>low risk of bias</b>.";
+      assessmentText = "Your study has <b>low risk of bias</b>.";
     } else if(totalScore <= 9){
-      assessmentText = "Your study has a <b>some concern for bias</b>.";
+      assessmentText = "Your study has <b>some concern for bias</b>.";
     } else {
-      assessmentText = "Your study has a <b>high risk of bias</b>.";
+      assessmentText = "Your study has <b>high risk of bias</b>.";
     }
 
     const finalAssessment = document.getElementById("finalAssessment");
