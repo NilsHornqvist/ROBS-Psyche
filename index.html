@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>ROBS-Psyche Tool</title>
+  <title>ROBS-Psyche</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -149,19 +149,29 @@ let currentQuestion = 1;
 const totalQuestions = 7;
 
 function startAssessment() {
-  document.getElementById("welcome").classList.add("hidden");
-  document.getElementById("question1").classList.remove("hidden");
+  const welcomeDiv = document.getElementById("welcome");
+  if(welcomeDiv) welcomeDiv.classList.add("hidden");
+  const firstQuestion = document.getElementById("question1");
+  if(firstQuestion) firstQuestion.classList.remove("hidden");
 }
 
 function answerQuestion(score) {
   totalScore += score;
-  document.getElementById("question" + currentQuestion).classList.add("hidden");
+
+  const currentQDiv = document.getElementById("question" + currentQuestion);
+  if(currentQDiv) currentQDiv.classList.add("hidden");
+
   currentQuestion++;
+
   if(currentQuestion <= totalQuestions) {
-    document.getElementById("question" + currentQuestion).classList.remove("hidden");
+    const nextQDiv = document.getElementById("question" + currentQuestion);
+    if(nextQDiv) nextQDiv.classList.remove("hidden");
   } else {
-    document.getElementById("results").classList.remove("hidden");
-    document.getElementById("scoreText").innerText = "Your total score: " + totalScore;
+    const resultsDiv = document.getElementById("results");
+    if(resultsDiv) resultsDiv.classList.remove("hidden");
+
+    const scoreText = document.getElementById("scoreText");
+    if(scoreText) scoreText.innerText = "Your total score: " + totalScore;
 
     let assessmentText = "";
     if(totalScore <= 4){
@@ -172,13 +182,10 @@ function answerQuestion(score) {
       assessmentText = "Your risk of bias on a psychedelic-assisted therapy specific assessment was <b>high risk of bias</b>.";
     }
 
-    document.getElementById("finalAssessment").innerHTML = assessmentText;
+    const finalAssessment = document.getElementById("finalAssessment");
+    if(finalAssessment) finalAssessment.innerHTML = assessmentText;
   }
 }
 </script>
-
-
-
-
 </body>
 </html>
