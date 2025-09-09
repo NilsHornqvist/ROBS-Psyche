@@ -134,6 +134,7 @@
 <div class="container hidden" id="results">
   <h2>Assessment Complete</h2>
   <p id="scoreText"></p>
+  <p id="finalAssessment"></p>
   <p>Interpretation:</p>
   <ul style="text-align:left">
     <li>0–4 = Low risk of bias</li>
@@ -155,8 +156,21 @@
     document.getElementById("question1").classList.add("hidden");
     document.getElementById("results").classList.remove("hidden");
     document.getElementById("scoreText").innerText = "Your total score: " + totalScore;
+
+    // Add final assessment
+    let assessmentText = "";
+    if(totalScore >= 0 && totalScore <= 4){
+      assessmentText = "Your risk of bias on a psychedelic-assisted therapy specific assessment was <b>low risk of bias</b>.";
+    } else if(totalScore >= 5 && totalScore <= 9){
+      assessmentText = "Your risk of bias on a psychedelic-assisted therapy specific assessment was <b>some concern for bias</b>.";
+    } else if(totalScore >= 10 && totalScore <= 14){
+      assessmentText = "Your risk of bias on a psychedelic-assisted therapy specific assessment was <b>high risk of bias</b>.";
+    }
+
+    document.getElementById("finalAssessment").innerHTML = assessmentText;
   }
 </script>
+
 
 </body>
 </html>
